@@ -1,0 +1,38 @@
+﻿<div>
+<a href="#/holidays/edit/0" class="Add">Create new Holiday</a>
+    <form class="form-inline" ng-submit="load()">
+        <div class="form-group col-md-3 inline_col">
+            <input autocomplete="off" type="text" ng-model="filter.searchText" class="form-control" placeholder="Enter Check book name..." name="s" />
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="linecons-search"></i>  Search
+        </button>
+    </form>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            TypeName
+        </th>
+        <th></th>
+    </tr>
+    <tbody ng-repeat="holiday in data | orderBy:orderByField:reverseSort">
+        <tr>
+            <td>{{holiday.Date | date: 'MM/dd/yyyy'}}</td>
+            <td>{{holiday.Name}}</td>
+            <td>{{holiday.TypeName}}</td>
+            <td>
+                <a href="#/holidays/edit/{{holiday .Id}}" class="edit">Edit</a>|
+                <a href="" class="delete">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<label ng-if="data.length=== 0">No Record</label>
+<pagination ng-if="data.length > 0" total-items="TotalItems" ng-model="filter.CurrentPage" items-per-page="filter.PageSize" max-size="10" class="pagination-sm" boundary-links="true" ng-change="changePage()"></pagination>
